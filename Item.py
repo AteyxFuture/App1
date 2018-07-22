@@ -19,15 +19,18 @@ class Item:
 
     def __init__(self, name, weight, item_type, specific):
         self.name = name
-        self.weight = weight
-        self.item_type = item_type
-        self.specific = specific
-        self.contents = set()
+        self.weight = int(weight)
+        self.item_type = int(item_type)
+        self.specific = int(specific)
+        self._contents = []
+
+    def __str__(self):
+        return self.name
 
     def get_weight(self):
         if self.item_type == 2:
             total_weight = 0
-            for i in self.contents:
+            for i in self._contents:
                 total_weight += i.get_weight()
             return total_weight + self.weight
         else:
@@ -36,7 +39,7 @@ class Item:
     def add(self, item):
         if isinstance(item, Item) == True and self.item_type == 2:
             if (self.get_weight()-self.weight+item.get_weight()) <= self.specific:
-                self.contents.add(item)
+                self._contents.append(item)
                 return str(item.name + ' added to ' + self.name + '.')
             else:
                 return str('Not enough space in ' + self.name + ' to hold this item!')
@@ -46,16 +49,34 @@ class Item:
             return str(self.name + ' cannot hold other items!')
     def empty(self):
         if self.item_type == 2:
-            self.contents.clear()
+            self._contents.clear()
+            return str(self.name + ' is now empty.')
         else:
             return str(self.name + ' cannot hold other items!')
 
-knife = Item('knife', 3, 0, 1)
-boots = Item('boots', 4, 1, 3)
-cape = Item('cape', 2, 1, 1)
-bottle = Item('bottle', 4, 2, 2)
-water = Item('water', 1, 3, 1)
+    def remove(self, item):
+        if self.item_type == 2:
+            self._contents.remove(item)
+            return str(item.name + ' removed from ' + self.name + '.')
+        else:
+            return str(self.name + ' cannot hold other items!')
 
-bottle.add(water)
+    @property
+    def contents(self):
+        return ('{' + ', '.join([str(item) for item in self._contents]) + '}')
+
+path = "C:/Users/a/Documents/GitHub/App1/Item_list.txt"
+with open(path) as Item_list:
+    text = Item_list.read()
+
+items = text.split('\n')
+for i in range(len(items)):
+    items[i] = items[i].split(', ')
+
+'''bottle.add(water)
 print(bottle.get_weight())
 print(bottle.contents)
+chest.add(bottle)
+print(chest.get_weight())
+print(chest.contents)
+'''
