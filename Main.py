@@ -15,6 +15,11 @@ class creature:
     def get_values(self):
         return self.property
 
+class item:
+
+    def __init__(self, weight):
+        self.weight = weight
+
 
 C0001 = creature('hobbit',
                  [15, 20, 40, 2, ['boots', 'knife', 'cape', 'bottle']])
