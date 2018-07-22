@@ -73,6 +73,13 @@ items = text.split('\n')
 for i in range(len(items)):
     items[i] = items[i].split(', ')
 
+I0000 = Item(items[0][0], items[0][1], items[0][2], items[0][3])
+I0001 = Item(items[1][0], items[1][1], items[1][2], items[1][3])
+I0002 = Item(items[2][0], items[2][1], items[2][2], items[2][3])
+I0003 = Item(items[3][0], items[3][1], items[3][2], items[3][3])
+I0004 = Item(items[4][0], items[4][1], items[4][2], items[4][3])
+I0005 = Item(items[5][0], items[5][1], items[5][2], items[5][3])
+
 '''bottle.add(water)
 print(bottle.get_weight())
 print(bottle.contents)
