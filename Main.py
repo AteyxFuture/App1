@@ -1,4 +1,7 @@
-class creature:
+import Item
+
+
+class Creature:
 
     def __init__(self, name, values):
         self.name = name
@@ -15,13 +18,8 @@ class creature:
     def get_values(self):
         return self.property
 
-class item:
 
-    def __init__(self, weight):
-        self.weight = weight
-
-
-C0001 = creature('hobbit',
+C0001 = Creature('hobbit',
                  [15, 20, 40, 2, ['boots', 'knife', 'cape', 'bottle']])
 print(C0001.get_values())
 print(C0001.items)
