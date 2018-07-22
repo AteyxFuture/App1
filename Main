@@ -1,0 +1,19 @@
+class creature:
+
+    def __init__(self, name, values):
+        self.name = name
+        types = ['age', 'height', 'weight', 'exp', 'items']
+        for i in range(len(types)):
+            self.types[i] = values[i]
+
+    def get_name(self):
+        return self.name
+
+    def get_values(self):
+        return self.property
+
+
+C0001 = creature('hobbit',
+                 [15, 20, 40, 2, ['boots', 'knife', 'cape', 'bottle']])
+print(C0001.get_values())
+values = [age, height, weight, exp, items]
