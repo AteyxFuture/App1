@@ -65,25 +65,33 @@ class Item:
     def contents(self):
         return ('{' + ', '.join([str(item) for item in self._contents]) + '}')
 
-path = "C:/Users/a/Documents/GitHub/App1/Item_list.txt"
+path = "Item_list.txt"
 with open(path) as Item_list:
     text = Item_list.read()
 
-items = text.split('\n')
-for i in range(len(items)):
-    items[i] = items[i].split(', ')
+items = text.split('\n\n')
+for i, e in enumerate(items):
+    items[i] = e.split('\n')
 
-I0000 = Item(items[0][0], items[0][1], items[0][2], items[0][3])
-I0001 = Item(items[1][0], items[1][1], items[1][2], items[1][3])
-I0002 = Item(items[2][0], items[2][1], items[2][2], items[2][3])
-I0003 = Item(items[3][0], items[3][1], items[3][2], items[3][3])
-I0004 = Item(items[4][0], items[4][1], items[4][2], items[4][3])
-I0005 = Item(items[5][0], items[5][1], items[5][2], items[5][3])
+for i, e in enumerate(items):
+    for j, f in enumerate(e):
+        e[j] = f.split(', ')
 
-'''bottle.add(water)
-print(bottle.get_weight())
-print(bottle.contents)
-chest.add(bottle)
-print(chest.get_weight())
-print(chest.contents)
-'''
+item_type_0 = items[0]
+item_type_1 = items[1]
+item_type_2 = items[2]
+item_type_3 = items[3]
+items = [item_type_0, item_type_1, item_type_2, item_type_3]
+
+
+def make_item(name, weight, item_type, specific):
+    item = Item(name, weight, item_type, specific)
+    return item
+
+done = []
+
+for i, e in enumerate(items):
+    for j, f in enumerate(e):
+        e[j] = make_item(f[0], f[1], f[2], f[3])
+
+
