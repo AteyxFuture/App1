@@ -66,8 +66,8 @@ class Item:
         return ('{' + ', '.join([str(item) for item in self._contents]) + '}')
 
 path = "Item_list.txt"
-with open(path) as Item_list:
-    text = Item_list.read()
+with open(path) as file:
+    text = file.read()
 
 items = text.split('\n\n')
 for i, e in enumerate(items):
