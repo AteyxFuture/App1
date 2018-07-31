@@ -1,16 +1,16 @@
 from Item import *
 
 
-class Creature:
+class Creature(object):
 
-    def __init__(self, name, age, height, weight, exp, items):
-        self.name = name
-        self.age = age
-        self.height = height
-        self.weight = weight
-        self.exp = exp
-        self.items = items
-        self.property = [self.age, self.height, self.weight, self.exp, self.items]
+    # put it to classes of individual creature types, which inherit from this, here is no need for constructor
+    #def __init__(self, name, age, height, weight, exp, items):
+    #    self.name = name
+    #    self.age = age
+    #    self.weight = weight
+    #    self.exp = exp
+    #    self.items = items
+    #    self.property = [self.age, self.height, self.weight, self.exp, self.items]
 
     def get_name(self):
         return self.name
@@ -24,6 +24,7 @@ with open(path) as file:
     text = file.read()
 
 def make_creature(name, age, height, weight, exp, items):
+    '''Create instance of Creature and add it to list of all creatures'''
     
 C0001 = Creature('hobbit',15, 20, 40, 2, [items[0][0], items[1][0], items[2][0], items[1][1]])
 print(C0001.get_values())
