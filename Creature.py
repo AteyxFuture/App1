@@ -3,14 +3,13 @@ from Item import *
 
 class Creature:
 
-    def __init__(self, name, age, height, weight, exp, items):
+    def __init__(self, name, age, weight, exp, inventory):
         self.name = name
-        self.age = age
-        self.height = height
-        self.weight = weight
-        self.exp = exp
-        self.items = items
-        self.property = [self.age, self.height, self.weight, self.exp, self.items]
+        self.age = int(age)
+        self.weight = int(weight)
+        self.exp = int(exp)
+        self.inventory = inventory
+        self.property = [self.age, self.weight, self.exp, self.inventory]
 
     def get_name(self):
         return self.name
@@ -18,13 +17,27 @@ class Creature:
     def get_values(self):
         return self.property
 
+    def take_item(self, item):
+        self.inventory.append(item)
+
+    def drop_item(self, item):
+        self.inventory.remove(item)
+
+    def use_item(self, item):
+        item.use()
+
 
 path = ("Creature_list.txt")
 with open(path) as file:
     text = file.read()
 
-def make_creature(name, age, height, weight, exp, items):
-    
-C0001 = Creature('hobbit',15, 20, 40, 2, [items[0][0], items[1][0], items[2][0], items[1][1]])
-print(C0001.get_values())
-print(C0001.items)
+creatures = text.split('\n')
+for i, e in enumerate(creatures):
+    creatures[i] = e.split('\t')
+
+def make_creature(name, age, weight, exp, inventory):
+    creature = Creature(name, age, weight, exp, inventory)
+    return creature
+
+for i, e in enumerate(creatures):
+    creatures[i] = make_creature(e[0], e[1], e[2], e[3], eval(e[4]))
