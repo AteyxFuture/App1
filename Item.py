@@ -24,8 +24,15 @@ class Item:
         self.specific = int(specific)
         self._contents = []
 
-    def __str__(self):
-        return self.name
+    def get_name(self):
+        if len(self._contents) > 0:
+            full_name = []
+            for i in self._contents:
+                full_name.append(i.name)
+            full_name_str = self.name + " with " + ', '.join(full_name)
+            return full_name_str
+        else:
+            return self.name
 
     def get_weight(self):
         if self.item_type == 2:
@@ -47,6 +54,7 @@ class Item:
             return str(self.name + ' is only able to hold items!')
         elif self.item_type != 2:
             return str(self.name + ' cannot hold other items!')
+
     def empty(self):
         if self.item_type == 2:
             self._contents.clear()
@@ -60,6 +68,10 @@ class Item:
             return str(item.name + ' removed from ' + self.name + '.')
         else:
             return str(self.name + ' cannot hold other items!')
+
+    def use(self):
+        pass
+
 
     @property
     def contents(self):
@@ -75,7 +87,7 @@ for i, e in enumerate(items):
 
 for i, e in enumerate(items):
     for j, f in enumerate(e):
-        e[j] = f.split(', ')
+        e[j] = f.split('\t')
 
 item_type_0 = items[0]
 item_type_1 = items[1]
