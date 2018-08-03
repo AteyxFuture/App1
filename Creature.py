@@ -9,7 +9,7 @@ class Creature:
         self.weight = int(weight)
         self.exp = int(exp)
         self.inventory = inventory
-        self.health = health
+        self.health = int(health)
 
     def get_name(self):
         return self.name
