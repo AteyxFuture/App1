@@ -1,2 +1,2 @@
 # App1
-Projekt 2D sidesroller hry.
+2D sidesroller game project.
