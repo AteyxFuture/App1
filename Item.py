@@ -1,17 +1,17 @@
 class Item:
     
     '''Items are objects that fall into various specific categories.
-    (0) Weapons:
+    A Weapons:
     Can be used for various purposes and their specific value determines the damage
     they are going to cause on hit.
-    (1) Wearables:
+    B Wearables:
     Items that creatures can wear eihter as means of protection or for aesthetic
     purpouses. Their specific value determines their durability.
-    (2) Containers:
+    C Containers:
     Items that can be filled with other items. Their specific value describes
     the maximum weight of items they are able to hold. They use the self.contents
     attribute for holding other items.
-    (3) Consumables:
+    D Consumables:
     Items that can be consumed to gain health. Their specific value determines the
     number of health point they are going to recover.
     '''
@@ -43,39 +43,71 @@ class Item:
         else:
             return self.weight
 
-    def add(self, item):
-        if isinstance(item, Item) == True and self.item_type == 2:
-            if (self.get_weight()-self.weight+item.get_weight()) <= self.specific:
-                self._contents.append(item)
-                return str(item.name + ' added to ' + self.name + '.')
-            else:
-                return str('Not enough space in ' + self.name + ' to hold this item!')
-        elif isinstance(item, Item) == False:
-            return str(self.name + ' is only able to hold items!')
-        elif self.item_type != 2:
-            return str(self.name + ' cannot hold other items!')
 
-    def empty(self):
-        if self.item_type == 2:
-            self._contents.clear()
-            return str(self.name + ' is now empty.')
-        else:
-            return str(self.name + ' cannot hold other items!')
+class A(Item):
 
-    def remove(self, item):
-        if self.item_type == 2:
-            self._contents.remove(item)
-            return str(item.name + ' removed from ' + self.name + '.')
-        else:
-            return str(self.name + ' cannot hold other items!')
+    def __init__(self, name, weight, item_type, specific):
+        self.name = name
+        self.weight = int(weight)
+        self.item_type = int(item_type)
+        self.specific = int(specific)
 
-    def use(self):
+    def use(self, author):
         pass
 
 
-    @property
-    def contents(self):
-        return ('{' + ', '.join([str(item) for item in self._contents]) + '}')
+class B(Item):
+
+    def __init__(self, name, weight, item_type, specific):
+        self.name = name
+        self.weight = int(weight)
+        self.item_type = int(item_type)
+        self.specific = int(specific)
+
+    def use(self, author):
+        pass
+
+
+class C(Item):
+
+
+    def __init__(self, name, weight, item_type, specific):
+        self.name = name
+        self.weight = int(weight)
+        self.item_type = int(item_type)
+        self.specific = int(specific)
+        self._contents = []
+
+    def add(self, item):
+        if (self.get_weight()-self.weight+item.get_weight()) <= self.specific:
+            self._contents.append(item)
+            return str(item.name + ' added to ' + self.name + '.')
+        else:
+            return str('Not enough space in ' + self.name + ' to hold this item!')
+
+    def empty(self):
+        self._contents.clear()
+        return str(self.name + ' is now empty.')
+
+    def remove(self, item):
+        self._contents.remove(item)
+        return str(item.name + ' removed from ' + self.name + '.')
+
+    def use(self, author):
+        pass
+
+
+class D(Item):
+
+    def __init__(self, name, weight, item_type, specific):
+        self.name = name
+        self.weight = int(weight)
+        self.item_type = int(item_type)
+        self.specific = int(specific)
+
+    def use(self, author):
+        author.heal(self.specific)
+        #move item to dump list
 
 path = "Item_list.txt"
 with open(path) as file:
@@ -97,8 +129,18 @@ items = [item_type_0, item_type_1, item_type_2, item_type_3]
 
 
 def make_item(name, weight, item_type, specific):
-    item = Item(name, weight, item_type, specific)
-    return item
+    if item_type == '0':
+        item = A(name, weight, item_type, specific)
+        return item
+    elif item_type == '1':
+        item = B(name, weight, item_type, specific)
+        return item
+    elif item_type == '2':
+        item = C(name, weight, item_type, specific)
+        return item
+    elif item_type == '3':
+        item = D(name, weight, item_type, specific)
+        return item
 
 done = []
 
