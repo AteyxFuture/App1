@@ -1,1 +1,1 @@
-hobbit	20	8	100	[items[0][0], items[2][1], items[3][0]]	100
+hobbit	20	8	100	[]	100

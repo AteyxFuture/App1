@@ -17,15 +17,8 @@ class Item:
     '''
 
 
-    def __init__(self, name, weight, item_type, specific):
-        self.name = name
-        self.weight = int(weight)
-        self.item_type = int(item_type)
-        self.specific = int(specific)
-        self._contents = []
-
     def get_name(self):
-        if len(self._contents) > 0:
+        if isinstance(self, C) and len(self._contents) > 0:
             full_name = []
             for i in self._contents:
                 full_name.append(i.name)
@@ -46,11 +39,13 @@ class Item:
 
 class A(Item):
 
-    def __init__(self, name, weight, item_type, specific):
+
+    def __init__(self, name, weight, item_type, specific, location):
         self.name = name
         self.weight = int(weight)
         self.item_type = int(item_type)
         self.specific = int(specific)
+        self.location = location
 
     def use(self, author):
         pass
@@ -58,11 +53,13 @@ class A(Item):
 
 class B(Item):
 
-    def __init__(self, name, weight, item_type, specific):
+
+    def __init__(self, name, weight, item_type, specific, location):
         self.name = name
         self.weight = int(weight)
         self.item_type = int(item_type)
         self.specific = int(specific)
+        self.location = location
 
     def use(self, author):
         pass
@@ -71,12 +68,13 @@ class B(Item):
 class C(Item):
 
 
-    def __init__(self, name, weight, item_type, specific):
+    def __init__(self, name, weight, item_type, specific, location):
         self.name = name
         self.weight = int(weight)
         self.item_type = int(item_type)
         self.specific = int(specific)
         self._contents = []
+        self.location = location
 
     def add(self, item):
         if (self.get_weight()-self.weight+item.get_weight()) <= self.specific:
@@ -99,15 +97,19 @@ class C(Item):
 
 class D(Item):
 
-    def __init__(self, name, weight, item_type, specific):
+
+    def __init__(self, name, weight, item_type, specific, location):
         self.name = name
         self.weight = int(weight)
         self.item_type = int(item_type)
         self.specific = int(specific)
+        self.location = location
 
     def use(self, author):
         author.heal(self.specific)
-        #move item to dump list
+        self.location.remove(self)
+        dump.append(self)
+
 
 path = "Item_list.txt"
 with open(path) as file:
@@ -127,25 +129,26 @@ item_type_2 = items[2]
 item_type_3 = items[3]
 items = [item_type_0, item_type_1, item_type_2, item_type_3]
 
+dump = []
 
-def make_item(name, weight, item_type, specific):
+def make_item(name, weight, item_type, specific, location):
     if item_type == '0':
-        item = A(name, weight, item_type, specific)
+        item = A(name, weight, item_type, specific, location)
         return item
     elif item_type == '1':
-        item = B(name, weight, item_type, specific)
+        item = B(name, weight, item_type, specific, location)
         return item
     elif item_type == '2':
-        item = C(name, weight, item_type, specific)
+        item = C(name, weight, item_type, specific, location)
         return item
     elif item_type == '3':
-        item = D(name, weight, item_type, specific)
+        item = D(name, weight, item_type, specific, location)
         return item
 
 done = []
 
 for i, e in enumerate(items):
     for j, f in enumerate(e):
-        e[j] = make_item(f[0], f[1], f[2], f[3])
+        e[j] = make_item(f[0], f[1], f[2], f[3], items[int(f[2])])
 
 

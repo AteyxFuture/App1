@@ -15,7 +15,9 @@ class Creature:
         return self.name
 
     def take_item(self, item):
+        item.location.remove(item)
         self.inventory.append(item)
+        item.location = self.inventory
 
     def drop_item(self, item):
         self.inventory.remove(item)
