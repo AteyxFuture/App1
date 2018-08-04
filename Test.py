@@ -1,4 +1,4 @@
-from Creature import *
+from Level import *
 
 creatures[0].take_item(items[0][0])
 creatures[0].take_item(items[1][0])
