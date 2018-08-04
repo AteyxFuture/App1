@@ -1,6 +1,6 @@
 class Creature:
 
-    def __init__(self, name, age, weight, exp, inventory, health, location):
+    def __init__(self, name, age, weight, exp, inventory, health, location, level=None):
         self.name = name
         self.age = int(age)
         self.weight = int(weight)
@@ -29,6 +29,12 @@ class Creature:
     def hurt(self, severity):
         self.health -= severity
 
+    def move_left(self):
+        self.location.place(self, self.location.get_left_index(self))
+
+    def move_right(self):
+        self.level.place(self, self.level.get_right_index(self))
+
 path = ("Creature_list.txt")
 with open(path) as file:
     text = file.read()
@@ -43,3 +49,5 @@ def make_creature(name, age, weight, exp, inventory, health, location):
 
 for i, e in enumerate(creatures):
     creatures[i] = make_creature(e[0], e[1], e[2], e[3], eval(e[4]), e[5], eval(e[6]))
+
+creatures_ref = creatures[:]

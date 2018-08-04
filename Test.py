@@ -4,8 +4,8 @@ creatures[0].take_item(items[0][0])
 creatures[0].take_item(items[1][0])
 creatures[0].take_item(items[3][0])
 
-creatures[0].use_item(creatures[0].inventory[2])
-
-for i in creatures[0].inventory:
-    print(i.get_name())
-
+print(creatures_ref[0])
+L1.place(creatures_ref[0], 0)
+print(creatures_ref[0].level.ground)
+creatures_ref[0].move_right()
+print(creatures_ref[0].level.ground)
